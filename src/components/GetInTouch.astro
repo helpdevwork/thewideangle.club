@@ -163,8 +163,20 @@ const emailjsReady = Boolean(emailjsServiceId && emailjsTemplateId && emailjsPub
         }
         submitBtn.disabled = true;
         status.textContent = 'Sending…';
+
+        var formData = new FormData(form);
+        var templateParams = {
+          from_name: formData.get('from_name'),
+          from_email: formData.get('from_email'),
+          phone: formData.get('phone'),
+          category: formData.get('category'),
+          message: formData.get('message'),
+          name: formData.get('from_name'),
+          email: formData.get('from_email')
+        };
+
         window.emailjs
-          .sendForm(emailjsServiceId, emailjsTemplateId, form)
+          .send(emailjsServiceId, emailjsTemplateId, templateParams)
           .then(function () {
             status.textContent = "Thanks — we'll get back to you soon.";
             form.reset();
