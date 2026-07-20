@@ -1,0 +1,113 @@
+---
+// Vertical hub / topical-pillar page (LLD §5, §8 SEO pillar-cluster model).
+import BaseLayout from './BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import GetInTouch from '../components/GetInTouch.astro';
+import CreditCardPopup from '../components/CreditCardPopup.astro';
+import AdSlot from '../components/AdSlot.astro';
+import { verticals, type VerticalId } from '../config/verticals';
+
+interface PostSummary {
+  slug: string;
+  title: string;
+  description: string;
+  heroImage: string;
+  heroAlt: string;
+  publishDate: Date;
+  author: string;
+  subcategory?: string;
+}
+
+interface Props {
+  vertical: VerticalId;
+  posts: PostSummary[];
+}
+
+const { vertical, posts } = Astro.props;
+const theme = verticals[vertical];
+---
+
+<BaseLayout title={theme.name} description={`${theme.tagline} — ${theme.feel}.`} vertical={vertical}>
+  <section class:list={['hub-hero', `hub-hero--${theme.heroStyle}`]}>
+    <div class="container">
+      <h1>{theme.name}</h1>
+      <p class="hub-tagline measure">{theme.tagline}. {theme.feel}.</p>
+    </div>
+  </section>
+
+  <section class="container hub-grid-section">
+    {
+      posts.length === 0 ? (
+        <p class="hub-empty">New {theme.name.toLowerCase()} stories are on the way — check back soon.</p>
+      ) : (
+        <div class="hub-grid">
+          {posts.map((post) => (
+            <PostCard
+              href={`/${vertical}/${post.slug}/`}
+              title={post.title}
+              description={post.description}
+              image={post.heroImage}
+              imageAlt={post.heroAlt}
+              tag={post.subcategory}
+              meta={new Intl.DateTimeFormat('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }).format(post.publishDate)}
+            />
+          ))}
+        </div>
+      )
+    }
+
+    <AdSlot variant="banner" />
+    <GetInTouch dense />
+  </section>
+
+  {vertical === 'credit-cards' && <CreditCardPopup />}
+</BaseLayout>
+
+<style>
+  .hub-hero {
+    padding-block: var(--space-7) var(--space-6);
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 6%, var(--bg)), var(--bg));
+  }
+
+  .hub-hero h1 {
+    color: var(--accent);
+  }
+
+  .hub-tagline {
+    font-size: 1.15rem;
+  }
+
+  .hub-grid-section {
+    padding-block: var(--space-6);
+  }
+
+  .hub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .hub-empty {
+    text-align: center;
+    padding: var(--space-7) 0;
+  }
+
+  @media (max-width: 640px) {
+    .hub-hero {
+      padding-block: var(--space-5) var(--space-4);
+    }
+
+    .hub-tagline {
+      font-size: 1rem;
+    }
+
+    .hub-grid-section {
+      padding-block: var(--space-5);
+    }
+
+    .hub-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

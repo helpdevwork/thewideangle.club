@@ -1,0 +1,63 @@
+---
+// Travel signature block: budget band + best season + optional map embed.
+interface Props {
+  destination: string;
+  bestSeason: string;
+  budgetBand: 'budget' | 'mid-range' | 'luxury';
+  mapEmbed?: string;
+}
+
+const { destination, bestSeason, budgetBand, mapEmbed } = Astro.props;
+const budgetLabel = { budget: '₹ Budget', 'mid-range': '₹₹ Mid-range', luxury: '₹₹₹ Luxury' }[budgetBand];
+---
+
+<section class="itinerary-block">
+  <div class="itinerary-pills">
+    <span class="pill">{destination}</span>
+    <span class="pill">Best season: {bestSeason}</span>
+    <span class="pill">{budgetLabel}</span>
+  </div>
+  {
+    mapEmbed && (
+      <div class="itinerary-map">
+        <iframe src={mapEmbed} loading="lazy" title={`Map of ${destination}`} referrerpolicy="no-referrer-when-downgrade" />
+      </div>
+    )
+  }
+</section>
+
+<style>
+  .itinerary-block {
+    margin-block: var(--space-5);
+  }
+
+  .itinerary-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: var(--space-3);
+  }
+
+  .pill {
+    background: var(--accent);
+    color: var(--accent-contrast);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-pill);
+  }
+
+  .itinerary-map {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    aspect-ratio: 16 / 7;
+    border: 1px solid var(--border);
+  }
+
+  .itinerary-map iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+</style>

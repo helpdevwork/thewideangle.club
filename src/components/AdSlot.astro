@@ -1,0 +1,51 @@
+---
+// Reserved-size ad placeholder (LLD §10). Ships inert until AdSense is
+// approved (BRD §7 sequencing: apply after ~6 months of domain age).
+// The real snippet is a PUBLIC_ id — see Documentation/07 — and gets
+// dropped in here once approved; layout dimensions are fixed now so
+// enabling ads later causes zero cumulative layout shift.
+interface Props {
+  variant?: 'in-content' | 'banner' | 'sidebar';
+  label?: string;
+}
+
+const { variant = 'in-content', label = 'Advertisement' } = Astro.props;
+
+const sizes = {
+  'in-content': { width: '100%', height: '250px' },
+  banner: { width: '100%', height: '90px' },
+  sidebar: { width: '300px', height: '600px' }
+};
+
+const size = sizes[variant];
+---
+
+<div class="ad-slot" data-ad-variant={variant} style={`min-height:${size.height}`} loading="lazy">
+  <span class="ad-slot-label">{label}</span>
+</div>
+
+<style>
+  .ad-slot {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: repeating-linear-gradient(
+      45deg,
+      var(--bg-elevated),
+      var(--bg-elevated) 10px,
+      var(--bg) 10px,
+      var(--bg) 20px
+    );
+    border: 1px dashed var(--border);
+    border-radius: var(--radius-sm);
+    margin-block: var(--space-5);
+  }
+
+  .ad-slot-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+</style>

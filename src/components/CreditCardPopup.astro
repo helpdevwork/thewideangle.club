@@ -1,0 +1,124 @@
+---
+// Shown once per browser session after a visitor spends 60s on any Credit
+// Cards hub or post page. Just the form (variant="popup"), pre-filled to
+// "Credit card doubt" — everything else left for the visitor to fill in.
+// Dismissible via the close button, the backdrop, or Escape (native to
+// <dialog>); once shown (dismissed OR submitted) it won't reappear this
+// session, so it's a single, unobtrusive nudge, not a repeat interruption.
+import GetInTouch from './GetInTouch.astro';
+
+const uid = Math.random().toString(36).slice(2, 9);
+const dialogId = `cc-popup-${uid}`;
+---
+
+<dialog id={dialogId} class="cc-popup" aria-labelledby={`${dialogId}-title`}>
+  <button type="button" class="cc-popup-close" data-cc-popup-close aria-label="Close">&times;</button>
+  <div class="cc-popup-body">
+    <GetInTouch variant="popup" defaultCategory="Credit card doubt" />
+  </div>
+</dialog>
+
+<script is:inline define:vars={{ dialogId }}>
+  (function () {
+    var STORAGE_KEY = 'twa-cc-popup-seen';
+    var DELAY_MS = 60000;
+
+    function init() {
+      var dialog = document.getElementById(dialogId);
+      if (!dialog) return;
+
+      var alreadySeen = false;
+      try {
+        alreadySeen = sessionStorage.getItem(STORAGE_KEY) === '1';
+      } catch {
+        /* storage unavailable — fall back to showing it once per page load */
+      }
+      if (alreadySeen) return;
+
+      var markSeen = function () {
+        try {
+          sessionStorage.setItem(STORAGE_KEY, '1');
+        } catch {
+          /* ignore — worst case it can show again this session */
+        }
+      };
+
+      var timer = setTimeout(function () {
+        if (dialog.open) return;
+        dialog.showModal();
+        markSeen();
+      }, DELAY_MS);
+
+      dialog.querySelector('[data-cc-popup-close]')?.addEventListener('click', function () {
+        dialog.close();
+      });
+      dialog.addEventListener('click', function (e) {
+        if (e.target === dialog) dialog.close();
+      });
+      dialog.addEventListener('close', function () {
+        markSeen();
+      });
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) {
+          clearTimeout(timer);
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
+
+<style>
+  .cc-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: var(--radius-lg);
+    max-width: min(92vw, 560px);
+    max-height: 88vh;
+    overflow-y: auto;
+    background: transparent;
+  }
+
+  .cc-popup::backdrop {
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  .cc-popup-body {
+    position: relative;
+  }
+
+  .cc-popup-body :global(.get-in-touch) {
+    margin: 0;
+    border-radius: var(--radius-lg);
+  }
+
+  .cc-popup-close {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+    z-index: 1;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid color-mix(in srgb, var(--inverse-fg) 30%, transparent);
+    background: transparent;
+    color: var(--inverse-fg);
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .cc-popup-close:hover {
+    background: color-mix(in srgb, var(--inverse-fg) 12%, transparent);
+  }
+</style>

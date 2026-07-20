@@ -1,0 +1,125 @@
+---
+// Black/white theme switcher. Preference persists in localStorage;
+// falls back to the OS preference on first visit (handled by the
+// blocking inline script in BaseLayout's <head> to avoid a flash).
+// Both modes are shown at once (sun + moon in the track) and the label
+// names the mode you'll switch TO, so the control's effect is obvious
+// before you click it — not just what it currently is.
+---
+
+<button
+  id="theme-toggle"
+  class="theme-toggle"
+  type="button"
+  aria-label="Switch to dark mode"
+  title="Switch to dark mode"
+>
+  <span class="theme-toggle-track" aria-hidden="true">
+    <span class="theme-toggle-icon theme-toggle-icon--sun">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </span>
+    <span class="theme-toggle-icon theme-toggle-icon--moon">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+    </span>
+    <span class="theme-toggle-thumb" aria-hidden="true"></span>
+  </span>
+  <span class="theme-toggle-label" id="theme-toggle-label">Switch to dark</span>
+</button>
+
+<style>
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .theme-toggle-track {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 56px;
+    height: 30px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-pill);
+    padding: 0 7px;
+    flex-shrink: 0;
+  }
+
+  .theme-toggle-icon {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    color: var(--fg-muted);
+    transition: color 0.25s var(--ease);
+  }
+
+  /* the icon matching the CURRENT mode reads clearly; the other is dim */
+  :root:not([data-theme='dark']) .theme-toggle-icon--sun,
+  :root[data-theme='dark'] .theme-toggle-icon--moon {
+    color: var(--bg);
+  }
+
+  .theme-toggle-thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--fg);
+    transition: transform 0.3s var(--ease);
+  }
+
+  :root[data-theme='dark'] .theme-toggle-thumb {
+    transform: translateX(26px);
+  }
+
+  .theme-toggle-label {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--fg);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 900px) {
+    .theme-toggle-label {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const KEY = 'twa-theme';
+  const root = document.documentElement;
+  const btn = document.getElementById('theme-toggle');
+  const label = document.getElementById('theme-toggle-label');
+
+  const sync = () => {
+    const current = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    const target = current === 'dark' ? 'light' : 'dark';
+    const text = `Switch to ${target}`;
+    if (label) label.textContent = text;
+    btn?.setAttribute('aria-label', text);
+    btn?.setAttribute('title', text);
+  };
+
+  sync();
+
+  btn?.addEventListener('click', () => {
+    const current = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    const next = current === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try {
+      localStorage.setItem(KEY, next);
+    } catch {
+      /* storage unavailable (private mode) — theme just won't persist */
+    }
+    sync();
+  });
+</script>

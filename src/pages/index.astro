@@ -1,0 +1,345 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import GetInTouch from '../components/GetInTouch.astro';
+import { verticalList } from '../config/verticals';
+
+const allEntries = (
+  await Promise.all(
+    verticalList.map(async (v) => {
+      const entries = await getCollection(v.id, ({ data }) => (import.meta.env.PROD ? data.published : true));
+      return entries.map((e) => ({ ...e, verticalId: v.id }));
+    })
+  )
+).flat();
+
+const sorted = allEntries.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+const spotlight = sorted[0];
+const latest = sorted.slice(1, 7);
+const spotlightVerticalName = spotlight ? verticalList.find((v) => v.id === spotlight.verticalId)?.name : '';
+---
+
+<BaseLayout title="thewideangle.club" description="Technology, travel, sport, credit cards, geopolitics, and culture — told with original photography and a personal point of view.">
+  <section class="hero">
+    <div class="container hero-inner">
+      <p class="eyebrow">Est. 2026 · A publication, not a niche</p>
+      <h1>
+        Six lenses.<br />
+        One point of view.
+      </h1>
+      <p class="hero-sub measure">
+        thewideangle.club is a multi-topic publication built on original photography and first-hand
+        reporting — technology, travel, sport, credit cards, geopolitics, and the experiences worth
+        having.
+      </p>
+      <div class="hero-cta">
+        <a href="#verticals" class="btn btn-solid">Explore verticals</a>
+        <a href="/contact/" class="btn btn-ghost">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero-stats container">
+      <div><span class="stat-num">06</span><span class="stat-label">Verticals</span></div>
+      <div><span class="stat-num">100%</span><span class="stat-label">Original imagery</span></div>
+      <div><span class="stat-num">IN</span><span class="stat-label">India-first, global lens</span></div>
+    </div>
+  </section>
+
+  {
+    spotlight && (
+      <section class="container spotlight-section" data-vertical={spotlight.verticalId}>
+        <a class="spotlight" href={`/${spotlight.verticalId}/${spotlight.id}/`}>
+          <div class="spotlight-media">
+            <img src={spotlight.data.heroImage} alt={spotlight.data.heroAlt} loading="eager" fetchpriority="high" />
+          </div>
+          <div class="spotlight-body">
+            <span class="eyebrow spotlight-eyebrow">Just published · {spotlightVerticalName}</span>
+            <h2>{spotlight.data.title}</h2>
+            <p class="measure">{spotlight.data.description}</p>
+            <span class="spotlight-cta">
+              Read the story
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+          </div>
+        </a>
+      </section>
+    )
+  }
+
+  <section id="verticals" class="container verticals-section">
+    <div class="section-head">
+      <p class="eyebrow">The verticals</p>
+      <h2>Same brand. Six distinct rooms.</h2>
+    </div>
+    <div class="verticals-grid">
+      {
+        verticalList.map((v) => (
+          <div data-vertical={v.id} class="vertical-tile-scope">
+            <a href={`/${v.id}/`} class="vertical-tile card">
+              <span class="vertical-tile-accent" />
+              <span class="vertical-tile-name">{v.name}</span>
+              <span class="vertical-tile-tagline">{v.tagline}</span>
+              <span class="vertical-tile-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  {
+    latest.length > 0 && (
+      <section class="container latest-section">
+        <div class="section-head">
+          <p class="eyebrow">Fresh</p>
+          <h2>More from the publication</h2>
+        </div>
+        <div class="latest-grid">
+          {latest.map((entry) => (
+            <div data-vertical={entry.verticalId}>
+              <PostCard
+                href={`/${entry.verticalId}/${entry.id}/`}
+                title={entry.data.title}
+                description={entry.data.description}
+                image={entry.data.heroImage}
+                imageAlt={entry.data.heroAlt}
+                tag={verticalList.find((v) => v.id === entry.verticalId)?.shortName}
+                meta={new Intl.DateTimeFormat('en-IN', { day: 'numeric', month: 'short' }).format(entry.data.publishDate)}
+              />
+            </div>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  <section class="container git-section">
+    <GetInTouch />
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding-block: var(--space-8) var(--space-6);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-inner h1 {
+    margin-block: var(--space-3) var(--space-4);
+  }
+
+  .hero-sub {
+    font-size: 1.2rem;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    margin-top: var(--space-5);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+    margin-top: var(--space-7);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--border);
+  }
+
+  .hero-stats > div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 2rem;
+    letter-spacing: -0.02em;
+  }
+
+  .stat-label {
+    color: var(--fg-muted);
+    font-size: 0.85rem;
+  }
+
+  .section-head {
+    margin-bottom: var(--space-5);
+  }
+
+  .spotlight-section {
+    padding-block: var(--space-6);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .spotlight {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: var(--space-5);
+    align-items: stretch;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+  }
+
+  .spotlight-media {
+    min-height: 320px;
+    overflow: hidden;
+  }
+
+  .spotlight-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s var(--ease);
+  }
+
+  .spotlight:hover .spotlight-media img {
+    transform: scale(1.04);
+  }
+
+  .spotlight-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--space-5) var(--space-5) var(--space-5) 0;
+  }
+
+  .spotlight-eyebrow {
+    color: var(--accent);
+  }
+
+  .spotlight-body h2 {
+    margin-block: var(--space-2) var(--space-3);
+  }
+
+  .spotlight-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--accent);
+    margin-top: var(--space-2);
+  }
+
+  .spotlight:hover .spotlight-cta svg {
+    transform: translateX(4px);
+  }
+
+  .spotlight-cta svg {
+    transition: transform 0.2s var(--ease);
+  }
+
+  .verticals-section,
+  .latest-section {
+    padding-block: var(--space-7);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .verticals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: var(--space-3);
+  }
+
+  .vertical-tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-4);
+    min-height: 168px;
+    overflow: hidden;
+  }
+
+  .vertical-tile-accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--accent);
+  }
+
+  .vertical-tile-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-top: var(--space-2);
+  }
+
+  .vertical-tile-tagline {
+    color: var(--fg-muted);
+    font-size: 0.9rem;
+    margin-top: 0.4rem;
+    flex: 1;
+  }
+
+  .vertical-tile-arrow {
+    align-self: flex-end;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--accent);
+    transition: transform 0.25s var(--ease);
+  }
+
+  .vertical-tile:hover .vertical-tile-arrow {
+    transform: translateX(6px);
+  }
+
+  .latest-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .git-section {
+    padding-block: var(--space-6) var(--space-7);
+  }
+
+  @media (max-width: 900px) {
+    .spotlight {
+      grid-template-columns: 1fr;
+    }
+
+    .spotlight-media {
+      min-height: 220px;
+    }
+
+    .spotlight-body {
+      padding: var(--space-4);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      padding-block: var(--space-6) var(--space-5);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+    }
+
+    .hero-stats {
+      gap: var(--space-4);
+      margin-top: var(--space-5);
+      padding-top: var(--space-4);
+    }
+
+    .verticals-section,
+    .latest-section,
+    .spotlight-section {
+      padding-block: var(--space-5);
+    }
+
+    .verticals-grid,
+    .latest-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

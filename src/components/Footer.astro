@@ -1,0 +1,159 @@
+---
+import { verticalList } from '../config/verticals';
+import { contact } from '../config/contact';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a href="/" class="wordmark">thewideangle.club</a>
+      <p class="footer-tagline">
+        Technology, travel, sport, money, geopolitics, and culture — told with original photography
+        and a personal point of view.
+      </p>
+      <div class="footer-social">
+        <a href={contact.instagramUrl} target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href={`https://wa.me/${contact.whatsappNumber}`} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a href={`mailto:${contact.email}`}>Email</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-heading">Verticals</p>
+      <ul>
+        {
+          verticalList.map((v) => (
+            <li>
+              <a href={`/${v.id}/`}>{v.name}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-heading">Site</p>
+      <ul>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/contact/">Get in Touch</a></li>
+        <li><a href="/sitemap-index.xml">Sitemap</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-heading">Legal</p>
+      <ul>
+        <li><a href="/privacy/">Privacy Policy</a></li>
+        <li><a href="/terms/">Terms of Use</a></li>
+        <li><a href="/disclosure/">Affiliate Disclosure</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <p>&copy; {year} thewideangle.club. All rights reserved.</p>
+    <p class="footer-disclosure">
+      Some links on this site are affiliate links. We may earn a commission at no extra cost to you.
+      See our <a href="/disclosure/">disclosure</a>.
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding-block: var(--space-6) var(--space-4);
+    margin-top: var(--space-8);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr repeat(3, 1fr);
+    gap: var(--space-5);
+  }
+
+  .footer-brand .wordmark {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.15rem;
+  }
+
+  .footer-tagline {
+    max-width: 34ch;
+    margin-top: var(--space-2);
+  }
+
+  .footer-social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-3);
+  }
+
+  .footer-social a {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--border-strong);
+  }
+
+  .footer-heading {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--fg);
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    margin-bottom: var(--space-2);
+  }
+
+  .footer-col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .footer-col a {
+    font-size: 0.9rem;
+    color: var(--fg-muted);
+  }
+
+  .footer-col a:hover {
+    color: var(--fg);
+  }
+
+  .footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-2);
+    border-top: 1px solid var(--border);
+    margin-top: var(--space-6);
+    padding-top: var(--space-4);
+    font-size: 0.8rem;
+  }
+
+  .footer-bottom p {
+    margin: 0;
+    color: var(--fg-muted);
+  }
+
+  .footer-disclosure a {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 800px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GetInTouch from '../components/GetInTouch.astro';
+---
+
+<BaseLayout
+  title="Get in Touch"
+  description="Reach thewideangle.club on WhatsApp, Instagram, or email — or send us a message directly, including questions about credit cards."
+>
+  <section class="container contact-page">
+    <p class="eyebrow">Say hello</p>
+    <h1>Get in Touch</h1>
+    <p class="measure">
+      Pitches, partnerships, corrections, a doubt about a credit card before you apply — whatever
+      it is, reach us however's easiest for you.
+    </p>
+    <GetInTouch />
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-page {
+    padding-block: var(--space-7) var(--space-8);
+  }
+
+  @media (max-width: 640px) {
+    .contact-page {
+      padding-block: var(--space-5) var(--space-6);
+    }
+  }
+</style>

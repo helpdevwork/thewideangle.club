@@ -1,0 +1,223 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import { verticalList } from '../config/verticals';
+
+interface Props {
+  activeVertical?: string;
+}
+
+const { activeVertical } = Astro.props;
+---
+
+<header class="site-header">
+  <div class="container header-row">
+    <a href="/" class="wordmark">thewideangle.club</a>
+
+    <nav class="primary-nav" aria-label="Verticals">
+      <ul>
+        {
+          verticalList.map((v) => (
+            <li>
+              <a href={`/${v.id}/`} class={activeVertical === v.id ? 'active' : ''} data-accent-hover data-vertical-hint={v.id}>
+                {v.shortName}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <ThemeToggle />
+      <button id="nav-toggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">
+        <span class="visually-hidden">Open menu</span>
+        <span class="nav-toggle-bars" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-nav" class="mobile-nav" hidden>
+    <ul>
+      {
+        verticalList.map((v) => (
+          <li>
+            <a href={`/${v.id}/`}>{v.name}</a>
+          </li>
+        ))
+      }
+      <li class="mobile-nav-divider"></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/contact/">Get in Touch</a></li>
+    </ul>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: saturate(180%) blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    height: 76px;
+    max-width: 1360px;
+  }
+
+  .wordmark {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.6rem;
+    letter-spacing: -0.02em;
+    flex-shrink: 0;
+  }
+
+  .primary-nav {
+    display: none;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .primary-nav ul {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.35rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .primary-nav a {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--fg);
+    white-space: nowrap;
+    padding: 0.5rem 0.85rem;
+    border-radius: var(--radius-pill);
+    transition: background-color 0.2s var(--ease), color 0.2s var(--ease);
+  }
+
+  .primary-nav a:hover {
+    background: var(--bg-elevated);
+  }
+
+  .primary-nav a.active {
+    background: var(--fg);
+    color: var(--bg);
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-shrink: 0;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border-strong);
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .nav-toggle-bars,
+  .nav-toggle-bars::before,
+  .nav-toggle-bars::after {
+    content: '';
+    display: block;
+    width: 16px;
+    height: 2px;
+    background: var(--fg);
+    position: relative;
+    transition: transform 0.2s var(--ease);
+  }
+
+  .nav-toggle-bars::before {
+    position: absolute;
+    top: -5px;
+  }
+
+  .nav-toggle-bars::after {
+    position: absolute;
+    top: 5px;
+  }
+
+  .mobile-nav {
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+
+  .mobile-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: var(--space-3) var(--space-4) var(--space-4);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mobile-nav a {
+    display: block;
+    padding: 0.85rem 0;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.05rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .mobile-nav-divider {
+    height: var(--space-2);
+  }
+
+  @media (min-width: 900px) {
+    .primary-nav {
+      display: flex;
+    }
+    .nav-toggle {
+      display: none;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .header-row {
+      height: 64px;
+    }
+
+    .wordmark {
+      font-size: 1.15rem;
+    }
+
+    .header-actions {
+      gap: var(--space-2);
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const menu = document.getElementById('mobile-nav');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = menu?.hasAttribute('hidden') === false;
+    if (isOpen) {
+      menu?.setAttribute('hidden', '');
+      toggle.setAttribute('aria-expanded', 'false');
+    } else {
+      menu?.removeAttribute('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+  });
+</script>

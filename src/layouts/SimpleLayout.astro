@@ -1,0 +1,44 @@
+---
+// Plain prose layout for trust/legal/informational pages — always
+// monochrome, no vertical accent, matching the homepage shell.
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  eyebrow?: string;
+}
+
+const { title, description, eyebrow } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="container simple-page">
+    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    <h1>{title}</h1>
+    <div class="simple-prose measure">
+      <slot />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .simple-page {
+    padding-block: var(--space-7) var(--space-8);
+  }
+
+  .simple-prose h2 {
+    margin-top: var(--space-6);
+  }
+
+  .simple-prose p,
+  .simple-prose li {
+    font-size: 1rem;
+  }
+
+  .simple-prose a {
+    color: var(--fg);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+</style>

@@ -1,0 +1,152 @@
+backend:
+  name: github
+  repo: YOUR_GITHUB_USERNAME/YOUR_REPO_NAME # TODO: set before deploying (Beginner Guide Part D1)
+  branch: main
+  base_url: https://your-oauth-worker.example.workers.dev # TODO: your Decap OAuth Worker (Docs §9)
+
+publish_mode: editorial_workflow
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+# Base fields shared by every collection (LLD §3.1) are repeated per
+# vertical below because Decap has no schema-inheritance concept —
+# the source of truth for validation is still src/content.config.ts.
+collections:
+  - name: technology
+    label: Technology
+    folder: src/content/technology
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Description, name: description, widget: text }
+      - { label: Subcategory, name: subcategory, widget: string, required: false }
+      - { label: Tags, name: tags, widget: list, default: [] }
+      - { label: Hero Image URL, name: heroImage, widget: string }
+      - { label: Hero Alt Text, name: heroAlt, widget: string }
+      - { label: Publish Date, name: publishDate, widget: datetime }
+      - { label: Author, name: author, widget: string, default: "Suraj Ghorpade" }
+      - { label: Published, name: published, widget: boolean, default: false, hint: "Off while you draft it, flip to on when ready to go live." }
+      - { label: Topic Cluster, name: topicCluster, widget: string }
+      - { label: Source Links, name: sourceLinks, widget: list, default: [] }
+      - { label: Related Tools, name: relatedTools, widget: list, required: false }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: travel
+    label: Travel
+    folder: src/content/travel
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Description, name: description, widget: text }
+      - { label: Subcategory, name: subcategory, widget: string, required: false }
+      - { label: Tags, name: tags, widget: list, default: [] }
+      - { label: Hero Image URL, name: heroImage, widget: string }
+      - { label: Hero Alt Text, name: heroAlt, widget: string }
+      - { label: Publish Date, name: publishDate, widget: datetime }
+      - { label: Author, name: author, widget: string, default: "Suraj Ghorpade" }
+      - { label: Published, name: published, widget: boolean, default: false, hint: "Off while you draft it, flip to on when ready to go live." }
+      - { label: Destination, name: destination, widget: string }
+      - { label: Best Season, name: bestSeason, widget: string }
+      - { label: Budget Band, name: budgetBand, widget: select, options: [budget, mid-range, luxury] }
+      - { label: Gallery, name: gallery, widget: list, default: [] }
+      - { label: Map Embed URL, name: mapEmbed, widget: string, required: false }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: sports
+    label: Sports
+    folder: src/content/sports
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Description, name: description, widget: text }
+      - { label: Subcategory, name: subcategory, widget: string, required: false }
+      - { label: Tags, name: tags, widget: list, default: [] }
+      - { label: Hero Image URL, name: heroImage, widget: string }
+      - { label: Hero Alt Text, name: heroAlt, widget: string }
+      - { label: Publish Date, name: publishDate, widget: datetime }
+      - { label: Author, name: author, widget: string, default: "Suraj Ghorpade" }
+      - { label: Published, name: published, widget: boolean, default: false, hint: "Off while you draft it, flip to on when ready to go live." }
+      - { label: Sport, name: sport, widget: string }
+      - { label: Event, name: event, widget: string }
+      - { label: Match Date, name: matchDate, widget: datetime, required: false }
+      - { label: Teams, name: teams, widget: list, default: [] }
+      - { label: Live Update, name: liveUpdate, widget: boolean, default: false }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: credit-cards
+    label: Credit Cards
+    folder: src/content/credit-cards
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Description, name: description, widget: text }
+      - label: Subcategory
+        name: subcategory
+        widget: select
+        required: false
+        options: ["Basics", "Card Review", "Comparison", "News"]
+        hint: "Set to 'Basics' to pin this post above the rest on the Credit Cards hub."
+      - { label: Tags, name: tags, widget: list, default: [] }
+      - { label: Hero Image URL, name: heroImage, widget: string }
+      - { label: Hero Alt Text, name: heroAlt, widget: string }
+      - { label: Publish Date, name: publishDate, widget: datetime }
+      - { label: Author, name: author, widget: string, default: "Suraj Ghorpade" }
+      - { label: Published, name: published, widget: boolean, default: false, hint: "Off while you draft it, flip to on when ready to go live." }
+      - label: Card Name
+        name: cardName
+        widget: string
+        required: false
+        hint: "Leave blank for an educational/basics post that isn't about one specific card."
+      - { label: Issuer, name: issuer, widget: string, required: false }
+      - { label: Annual Fee, name: annualFee, widget: string, required: false }
+      - { label: Reward Rate, name: rewardRate, widget: string, required: false }
+      - { label: Best For, name: bestFor, widget: string, required: false }
+      - { label: Apply Link, name: applyLink, widget: string, required: false }
+      - { label: Disclosure Level, name: disclosureLevel, widget: select, options: [standard, sponsored], default: standard }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: geo-politics
+    label: Geo Politics
+    folder: src/content/geo-politics
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Description, name: description, widget: text }
+      - { label: Subcategory, name: subcategory, widget: string, required: false }
+      - { label: Tags, name: tags, widget: list, default: [] }
+      - { label: Hero Image URL, name: heroImage, widget: string }
+      - { label: Hero Alt Text, name: heroAlt, widget: string }
+      - { label: Publish Date, name: publishDate, widget: datetime }
+      - { label: Author, name: author, widget: string, default: "Suraj Ghorpade" }
+      - { label: Published, name: published, widget: boolean, default: false, hint: "Off while you draft it, flip to on when ready to go live." }
+      - { label: Region, name: region, widget: string }
+      - { label: Topic Cluster, name: topicCluster, widget: string }
+      - { label: Source Links, name: sourceLinks, widget: list, default: [] }
+      - { label: Related Topics, name: relatedTopics, widget: list, required: false }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: experiences
+    label: Experiences
+    folder: src/content/experiences
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Description, name: description, widget: text }
+      - { label: Subcategory, name: subcategory, widget: string, required: false }
+      - { label: Tags, name: tags, widget: list, default: [] }
+      - { label: Hero Image URL, name: heroImage, widget: string }
+      - { label: Hero Alt Text, name: heroAlt, widget: string }
+      - { label: Publish Date, name: publishDate, widget: datetime }
+      - { label: Author, name: author, widget: string, default: "Suraj Ghorpade" }
+      - { label: Published, name: published, widget: boolean, default: false, hint: "Off while you draft it, flip to on when ready to go live." }
+      - { label: Experience Type, name: experienceType, widget: string }
+      - { label: Location, name: location, widget: string }
+      - { label: Sponsored, name: sponsored, widget: boolean, default: false }
+      - { label: Partner, name: partner, widget: string, required: false }
+      - { label: Body, name: body, widget: markdown }

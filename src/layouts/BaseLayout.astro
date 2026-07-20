@@ -1,0 +1,120 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+import { verticalList, type VerticalId } from '../config/verticals';
+
+interface Props {
+  title: string;
+  description: string;
+  vertical?: VerticalId;
+  image?: string;
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown>;
+}
+
+const { title, description, vertical, image, noindex, jsonLd } = Astro.props;
+const siteName = 'thewideangle.club';
+const pageTitle = title === siteName ? title : `${title} | ${siteName}`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage = image ?? '/og-default.svg';
+
+// Public IDs only (Documentation/07 §3) — inert until set in Cloudflare Pages env vars.
+const ga4Id = import.meta.env.PUBLIC_GA4_ID;
+const umamiId = import.meta.env.PUBLIC_UMAMI_ID;
+const umamiSrc = import.meta.env.PUBLIC_UMAMI_SRC;
+const adsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT;
+const cuelinksSrc = import.meta.env.PUBLIC_CUELINKS_SRC;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <!-- Google tag (gtag.js) — placed immediately after <head>, per Google's own install
+         instructions, so it loads before anything else that could delay it. -->
+    {ga4Id && (
+      <Fragment>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`}></script>
+        <script is:inline define:vars={{ ga4Id }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', ga4Id);
+        </script>
+      </Fragment>
+    )}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href={canonicalURL} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
+
+    <!-- Fonts: Space Grotesk (display) + Inter (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+
+    <!-- Generated per-vertical accent variables — single source of truth: src/config/verticals.ts -->
+    <style set:html={verticalList
+      .map(
+        (v) => `[data-vertical="${v.id}"]{--accent:${v.accent};--accent-dark:${v.accentDark};--accent-contrast:#ffffff;}
+        :root[data-theme="dark"] [data-vertical="${v.id}"]{--accent:${v.accentDark};--accent-contrast:#0a0a0a;}
+        @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) [data-vertical="${v.id}"]{--accent:${v.accentDark};--accent-contrast:#0a0a0a;}}`
+      )
+      .join('\n')}
+    />
+
+    <!-- Blocking theme script: read stored/OS preference before first paint to avoid a flash -->
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem('twa-theme');
+          var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
+
+    {umamiId && umamiSrc && <script defer src={umamiSrc} data-website-id={umamiId}></script>}
+    {adsenseClient && (
+      <script
+        async
+        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
+        crossorigin="anonymous"
+      ></script>
+    )}
+    {cuelinksSrc && <script async src={cuelinksSrc}></script>}
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <Header activeVertical={vertical} />
+    <main id="main" data-vertical={vertical}>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

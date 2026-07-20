@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import HubLayout from '../../layouts/HubLayout.astro';
+import { verticalList } from '../../config/verticals';
+
+export async function getStaticPaths() {
+  return Promise.all(
+    verticalList.map(async (v) => {
+      const entries = await getCollection(v.id, ({ data }) => import.meta.env.PROD ? data.published : true);
+      // "Basics" posts (e.g. the debit/credit card primers) are pinned ahead
+      // of the rest so newcomers land on foundational content first, with
+      // normal newest-first ordering inside each group.
+      const posts = entries
+        .sort((a, b) => {
+          const aBasics = a.data.subcategory === 'Basics' ? 1 : 0;
+          const bBasics = b.data.subcategory === 'Basics' ? 1 : 0;
+          if (aBasics !== bBasics) return bBasics - aBasics;
+          return b.data.publishDate.valueOf() - a.data.publishDate.valueOf();
+        })
+        .map((e) => ({
+          slug: e.id,
+          title: e.data.title,
+          description: e.data.description,
+          heroImage: e.data.heroImage,
+          heroAlt: e.data.heroAlt,
+          publishDate: e.data.publishDate,
+          author: e.data.author,
+          subcategory: e.data.subcategory
+        }));
+      return { params: { vertical: v.id }, props: { vertical: v.id, posts } };
+    })
+  );
+}
+
+const { vertical, posts } = Astro.props;
+---
+
+<HubLayout vertical={vertical} posts={posts} />

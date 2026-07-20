@@ -1,0 +1,116 @@
+---
+// Technology / Geo Politics signature block: explainer callout + cited
+// source list (E-E-A-T). `region` is optional — set it for Geo Politics
+// posts to show a region pill above the explainer.
+interface Props {
+  topicCluster: string;
+  sourceLinks: string[];
+  relatedTools?: string[];
+  region?: string;
+}
+
+const { topicCluster, sourceLinks, relatedTools, region } = Astro.props;
+---
+
+<section class="source-list">
+  {region && <span class="region-tag">📍 {region}</span>}
+  <div class="explainer-callout">
+    <span class="eyebrow">How it works</span>
+    <p>Part of our <strong>{topicCluster}</strong> coverage — see related explainers below.</p>
+  </div>
+
+  {
+    relatedTools && relatedTools.length > 0 && (
+      <div class="related-tools">
+        {relatedTools.map((tool) => <span class="tool-tag">{tool}</span>)}
+      </div>
+    )
+  }
+
+  {
+    sourceLinks.length > 0 && (
+      <div class="sources">
+        <p class="sources-heading">Sources</p>
+        <ol>
+          {sourceLinks.map((src) => (
+            <li>
+              <a href={src} target="_blank" rel="noopener noreferrer">
+                {src.replace(/^https?:\/\//, '')}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    )
+  }
+</section>
+
+<style>
+  .source-list {
+    margin-block: var(--space-5);
+  }
+
+  .region-tag {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    color: var(--fg-muted);
+    margin-bottom: var(--space-2);
+  }
+
+  .explainer-callout {
+    background: color-mix(in srgb, var(--accent) 8%, var(--bg));
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius-sm);
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .explainer-callout p {
+    margin: 0.3rem 0 0;
+    color: var(--fg);
+  }
+
+  .related-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: var(--space-3);
+  }
+
+  .tool-tag {
+    font-size: 0.8rem;
+    font-family: var(--font-display);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    padding: 0.3rem 0.8rem;
+    color: var(--fg-muted);
+  }
+
+  .sources {
+    margin-top: var(--space-4);
+    border-top: 1px solid var(--border);
+    padding-top: var(--space-3);
+  }
+
+  .sources-heading {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--fg-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .sources ol {
+    margin: 0;
+    padding-left: 1.2rem;
+    font-size: 0.85rem;
+  }
+
+  .sources a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    word-break: break-all;
+  }
+</style>

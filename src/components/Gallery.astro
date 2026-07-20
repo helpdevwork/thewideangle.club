@@ -1,0 +1,181 @@
+---
+// Masonry gallery + accessible lightbox (LLD §7). Uses <dialog> for
+// native focus-trapping and Escape-to-close; keyboard arrows move
+// between images. No JS framework, no server — just the built-in image.
+interface GalleryImage {
+  src: string;
+  alt: string;
+  caption?: string;
+  exif?: string;
+}
+
+interface Props {
+  images: GalleryImage[];
+  id?: string;
+}
+
+const { images, id = 'gallery' } = Astro.props;
+---
+
+<div class="gallery-masonry" id={id}>
+  {
+    images.map((img, i) => (
+      <button type="button" class="gallery-item" data-index={i} aria-label={`Open image: ${img.alt}`}>
+        <img src={img.src} alt={img.alt} loading={i < 2 ? 'eager' : 'lazy'} />
+      </button>
+    ))
+  }
+</div>
+
+<dialog class="gallery-lightbox" data-lightbox-for={id}>
+  <button type="button" class="lightbox-close" aria-label="Close gallery">&times;</button>
+  <button type="button" class="lightbox-nav lightbox-prev" aria-label="Previous image">&larr;</button>
+  <figure>
+    <img class="lightbox-image" src="" alt="" />
+    <figcaption>
+      <span class="lightbox-caption"></span>
+      <span class="lightbox-exif"></span>
+    </figcaption>
+  </figure>
+  <button type="button" class="lightbox-nav lightbox-next" aria-label="Next image">&rarr;</button>
+</dialog>
+
+<script define:vars={{ images, id }}>
+  const root = document.getElementById(id);
+  const dialog = document.querySelector(`dialog[data-lightbox-for="${id}"]`);
+  if (root && dialog) {
+    const img = dialog.querySelector('.lightbox-image');
+    const caption = dialog.querySelector('.lightbox-caption');
+    const exif = dialog.querySelector('.lightbox-exif');
+    let current = 0;
+
+    const show = (idx) => {
+      current = (idx + images.length) % images.length;
+      const data = images[current];
+      img.src = data.src;
+      img.alt = data.alt;
+      caption.textContent = data.caption ?? '';
+      exif.textContent = data.exif ?? '';
+    };
+
+    root.querySelectorAll('.gallery-item').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        show(Number(btn.dataset.index));
+        dialog.showModal();
+      });
+    });
+
+    dialog.querySelector('.lightbox-close')?.addEventListener('click', () => dialog.close());
+    dialog.querySelector('.lightbox-prev')?.addEventListener('click', () => show(current - 1));
+    dialog.querySelector('.lightbox-next')?.addEventListener('click', () => show(current + 1));
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+    dialog.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') show(current - 1);
+      if (e.key === 'ArrowRight') show(current + 1);
+    });
+  }
+</script>
+
+<style>
+  .gallery-masonry {
+    columns: 3 220px;
+    column-gap: var(--space-3);
+  }
+
+  .gallery-item {
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0 0 var(--space-3);
+    border: none;
+    background: none;
+    cursor: zoom-in;
+    break-inside: avoid;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.4s var(--ease);
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.03);
+  }
+
+  .gallery-lightbox {
+    border: none;
+    background: var(--inverse-bg);
+    color: var(--inverse-fg);
+    max-width: 92vw;
+    max-height: 92vh;
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+  }
+
+  .gallery-lightbox::backdrop {
+    background: rgba(0, 0, 0, 0.85);
+  }
+
+  .gallery-lightbox figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .lightbox-image {
+    max-height: 70vh;
+    width: auto;
+    border-radius: var(--radius-sm);
+  }
+
+  .lightbox-caption {
+    font-family: var(--font-display);
+    font-weight: 600;
+    display: block;
+  }
+
+  .lightbox-exif {
+    display: block;
+    font-size: 0.8rem;
+    opacity: 0.7;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+    background: transparent;
+    color: inherit;
+    border: none;
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    color: inherit;
+    border: none;
+    font-size: 1.6rem;
+    cursor: pointer;
+    padding: var(--space-2);
+  }
+
+  .lightbox-prev {
+    left: var(--space-2);
+  }
+
+  .lightbox-next {
+    right: var(--space-2);
+  }
+</style>

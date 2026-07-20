@@ -1,0 +1,64 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+const url = new URL(Astro.url.pathname, Astro.site).toString();
+const encodedUrl = encodeURIComponent(url);
+const encodedTitle = encodeURIComponent(title);
+---
+
+<div class="share-bar" data-share-url={url}>
+  <span class="eyebrow">Share</span>
+  <a href={`https://wa.me/?text=${encodedTitle}%20${encodedUrl}`} target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">WhatsApp</a>
+  <a href={`https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`} target="_blank" rel="noopener noreferrer" aria-label="Share on X">X</a>
+  <button type="button" class="share-copy" data-copy-link>Copy link</button>
+</div>
+
+<script>
+  document.querySelectorAll('[data-copy-link]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const bar = btn.closest('[data-share-url]');
+      const url = bar?.getAttribute('data-share-url');
+      if (!url) return;
+      try {
+        await navigator.clipboard.writeText(url);
+        const original = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(() => (btn.textContent = original), 1500);
+      } catch {
+        /* clipboard unavailable — link stays selectable in the address bar */
+      }
+    });
+  });
+</script>
+
+<style>
+  .share-bar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    padding-block: var(--space-3);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-block: var(--space-4);
+  }
+
+  .share-bar a,
+  .share-copy {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.85rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--fg-muted);
+  }
+
+  .share-bar a:hover,
+  .share-copy:hover {
+    color: var(--accent);
+  }
+</style>

@@ -1,0 +1,210 @@
+---
+// Data-driven post template (LLD §5): reads the post's vertical against
+// verticals.ts and renders the matching hero style + signature content
+// block + primary monetization module. One template, N distinct rooms.
+import BaseLayout from './BaseLayout.astro';
+import ShareBar from '../components/ShareBar.astro';
+import GetInTouch from '../components/GetInTouch.astro';
+import CreditCardPopup from '../components/CreditCardPopup.astro';
+import AdSlot from '../components/AdSlot.astro';
+import Gallery from '../components/Gallery.astro';
+import CardCompare from '../components/blocks/CardCompare.astro';
+import Itinerary from '../components/blocks/Itinerary.astro';
+import ScoreStrip from '../components/blocks/ScoreStrip.astro';
+import PullQuote from '../components/blocks/PullQuote.astro';
+import SourceList from '../components/blocks/SourceList.astro';
+import { verticals, type VerticalId } from '../config/verticals';
+
+interface Props {
+  vertical: VerticalId;
+  data: Record<string, any>;
+}
+
+const { vertical, data } = Astro.props;
+const theme = verticals[vertical];
+const dateLabel = new Intl.DateTimeFormat('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }).format(
+  data.publishDate
+);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: data.title,
+  description: data.description,
+  image: new URL(data.heroImage, Astro.site).toString(),
+  datePublished: data.publishDate.toISOString(),
+  dateModified: (data.updatedDate ?? data.publishDate).toISOString(),
+  author: { '@type': 'Person', name: data.author },
+  publisher: { '@type': 'Organization', name: 'thewideangle.club' }
+};
+---
+
+<BaseLayout title={data.title} description={data.description} vertical={vertical} image={data.heroImage} jsonLd={jsonLd}>
+  <article>
+    <header class:list={['post-hero', `hero--${theme.heroStyle}`]}>
+      <img src={data.heroImage} alt={data.heroAlt} class="post-hero-image" fetchpriority="high" />
+      <div class="post-hero-scrim"></div>
+      <div class="container post-hero-content">
+        <p class="eyebrow hero-eyebrow">{theme.name}{data.subcategory ? ` · ${data.subcategory}` : ''}</p>
+        <h1>{data.title}</h1>
+        <p class="post-hero-meta">By {data.author} · {dateLabel}</p>
+      </div>
+    </header>
+
+    <div class="container post-body-wrap">
+      <div class="post-body measure">
+        {vertical === 'technology' && (
+          <SourceList topicCluster={data.topicCluster} sourceLinks={data.sourceLinks} relatedTools={data.relatedTools} />
+        )}
+        {vertical === 'geo-politics' && (
+          <SourceList topicCluster={data.topicCluster} sourceLinks={data.sourceLinks} relatedTools={data.relatedTopics} region={data.region} />
+        )}
+        {vertical === 'travel' && (
+          <Itinerary destination={data.destination} bestSeason={data.bestSeason} budgetBand={data.budgetBand} mapEmbed={data.mapEmbed} />
+        )}
+        {vertical === 'sports' && (
+          <ScoreStrip sport={data.sport} event={data.event} teams={data.teams} matchDate={data.matchDate} liveUpdate={data.liveUpdate} />
+        )}
+        {vertical === 'credit-cards' && data.cardName && (
+          <CardCompare
+            cardName={data.cardName}
+            issuer={data.issuer}
+            annualFee={data.annualFee}
+            rewardRate={data.rewardRate}
+            bestFor={data.bestFor}
+            applyLink={data.applyLink}
+            disclosureLevel={data.disclosureLevel}
+          />
+        )}
+        {vertical === 'experiences' && (
+          <PullQuote quote={data.description} experienceType={data.experienceType} location={data.location} sponsored={data.sponsored} partner={data.partner} />
+        )}
+
+        <div class="prose">
+          <slot />
+        </div>
+
+        {vertical === 'travel' && data.gallery?.length > 0 && (
+          <Gallery id="post-gallery" images={data.gallery.map((src: string) => ({ src, alt: data.heroAlt }))} />
+        )}
+
+        <AdSlot variant="in-content" />
+
+        <ShareBar title={data.title} />
+        <GetInTouch dense />
+      </div>
+    </div>
+  </article>
+
+  {vertical === 'credit-cards' && <CreditCardPopup />}
+</BaseLayout>
+
+<style>
+  .post-hero {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .post-hero-image {
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .post-hero-scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0) 60%);
+  }
+
+  .post-hero-content {
+    position: absolute;
+    left: 50%;
+    bottom: var(--space-5);
+    transform: translateX(-50%);
+    width: 100%;
+    color: #fff;
+  }
+
+  .post-hero-content h1 {
+    color: #fff;
+    margin-bottom: var(--space-2);
+  }
+
+  .hero-eyebrow {
+    color: var(--accent-dark, #fff);
+  }
+
+  .post-hero-meta {
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0;
+  }
+
+  .hero--editorial .post-hero-image,
+  .hero--compare .post-hero-image {
+    height: 46vh;
+    min-height: 320px;
+  }
+
+  .hero--photo-map .post-hero-image,
+  .hero--magazine .post-hero-image,
+  .hero--live-banner .post-hero-image {
+    height: 66vh;
+    min-height: 420px;
+  }
+
+  .post-body-wrap {
+    display: flex;
+    justify-content: center;
+  }
+
+  .post-body {
+    padding-block: var(--space-6);
+    width: 100%;
+  }
+
+  .prose :global(h2) {
+    margin-top: var(--space-6);
+  }
+
+  .prose :global(p) {
+    color: var(--fg);
+    font-size: 1.05rem;
+  }
+
+  .prose :global(img) {
+    border-radius: var(--radius-md);
+    margin-block: var(--space-4);
+  }
+
+  .prose :global(blockquote) {
+    border-left: 3px solid var(--accent);
+    padding-left: var(--space-3);
+    font-style: italic;
+    color: var(--fg-muted);
+  }
+
+  .prose :global(a) {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  @media (max-width: 640px) {
+    .hero--editorial .post-hero-image,
+    .hero--compare .post-hero-image {
+      height: 34vh;
+      min-height: 220px;
+    }
+
+    .hero--photo-map .post-hero-image,
+    .hero--magazine .post-hero-image,
+    .hero--live-banner .post-hero-image {
+      height: 46vh;
+      min-height: 300px;
+    }
+
+    .post-hero-content {
+      bottom: var(--space-3);
+    }
+  }
+</style>

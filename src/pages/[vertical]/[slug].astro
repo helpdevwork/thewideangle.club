@@ -1,0 +1,25 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import PostLayout from '../../layouts/PostLayout.astro';
+import { verticalList, type VerticalId } from '../../config/verticals';
+
+export async function getStaticPaths() {
+  const paths = [];
+  for (const v of verticalList) {
+    const entries = (await getCollection(v.id, ({ data }) =>
+      import.meta.env.PROD ? data.published : true
+    )) as CollectionEntry<VerticalId>[];
+    for (const entry of entries) {
+      paths.push({ params: { vertical: v.id, slug: entry.id }, props: { entry } });
+    }
+  }
+  return paths;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<PostLayout vertical={entry.collection as VerticalId} data={entry.data}>
+  <Content />
+</PostLayout>
