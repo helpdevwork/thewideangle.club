@@ -138,11 +138,7 @@ const emailjsReady = Boolean(emailjsServiceId && emailjsTemplateId && emailjsPub
   </form>
 </div>
 
-<script
-  is:inline
-  define:vars={{ emailjsServiceId, emailjsTemplateId, emailjsPublicKey, emailjsReady, formId, statusId, submitId }}
-  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
-/>
+<script is:inline src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script is:inline define:vars={{ emailjsServiceId, emailjsTemplateId, emailjsPublicKey, emailjsReady, formId, statusId, submitId }}>
   (function () {
     function wire() {
