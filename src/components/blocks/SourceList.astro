@@ -7,32 +7,38 @@ interface Props {
   sourceLinks: string[];
   relatedTools?: string[];
   region?: string;
+  showMeta?: boolean;
+  showSources?: boolean;
 }
 
-const { topicCluster, sourceLinks, relatedTools, region } = Astro.props;
+const { topicCluster, sourceLinks, relatedTools, region, showMeta = true, showSources = true } = Astro.props;
 ---
 
 <section class="source-list">
-  {region && <span class="region-tag">📍 {region}</span>}
-  <div class="explainer-callout">
-    <span class="eyebrow">How it works</span>
-    <p>Part of our <strong>{topicCluster}</strong> coverage — see related explainers below.</p>
-  </div>
-
-  {
-    relatedTools && relatedTools.length > 0 && (
-      <div class="related-tools">
-        {relatedTools.map((tool) => <span class="tool-tag">{tool}</span>)}
+  {showMeta && (
+    <>
+      {region && <span class="region-tag">📍 {region}</span>}
+      <div class="explainer-callout">
+        <span class="eyebrow">How it works</span>
+        <p>Part of our <strong>{topicCluster}</strong> coverage — see related explainers below.</p>
       </div>
-    )
-  }
+
+      {
+        relatedTools && relatedTools.length > 0 && (
+          <div class="related-tools">
+            {relatedTools.map((tool) => <span class="tool-tag">{tool}</span>)}
+          </div>
+        )
+      }
+    </>
+  )}
 
   {
-    sourceLinks.length > 0 && (
+    showSources && sourceLinks.length > 0 && (
       <div class="sources">
         <p class="sources-heading">Sources</p>
         <ol>
-          {sourceLinks.map((src) => (
+          {sourceLinks.slice(0, 5).map((src) => (
             <li>
               <a href={src} target="_blank" rel="noopener noreferrer">
                 {src.replace(/^https?:\/\//, '')}
