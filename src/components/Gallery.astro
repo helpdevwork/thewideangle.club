@@ -80,26 +80,28 @@ const { images, id = 'gallery' } = Astro.props;
 
 <style>
   .gallery-masonry {
-    columns: 3 220px;
-    column-gap: var(--space-3);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--space-3);
   }
 
   .gallery-item {
     display: block;
     width: 100%;
     padding: 0;
-    margin: 0 0 var(--space-3);
+    margin: 0;
     border: none;
     background: none;
     cursor: zoom-in;
-    break-inside: avoid;
     border-radius: var(--radius-sm);
     overflow: hidden;
   }
 
   .gallery-item img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
     transition: transform 0.4s var(--ease);
   }
 
