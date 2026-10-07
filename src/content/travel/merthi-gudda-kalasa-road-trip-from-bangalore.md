@@ -1,5 +1,5 @@
 ---
-title: "Merthi Gudda, Kalasa: A Road Trip from Bangalore with Nine Friends, Leeches, and Zero Non-Veg"
+title: "Merthi Gudda, Kalasa: A Road Trip from Bangalore with Nine Friends and Leeches"
 description: "A three-day road trip from Bangalore to Kalasa over the Gandhi Jayanti long weekend — six bikes, nine people, a trek up Merthi Gudda at roughly 2,000 metres, an afternoon in the Bhadra River at Rudrapada, and a non-veg food hunt that only paid off on the drive home at Hassan's Imperio."
 vertical: travel
 subcategory: "Hill Stations"
