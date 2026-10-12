@@ -34,12 +34,15 @@ trips I've been on.
 We rolled out of Bangalore somewhere around 6:30 a.m. on the morning of 2nd October. Six bikes in
 a loose convoy through the city's early-morning traffic, which at that hour on a national holiday
 was about as forgiving as Bangalore traffic ever gets. The first proper stop was Hassan, roughly
-three hours down NH 75, where we'd arranged breakfast at a colleague's house. This wasn't a quick
-chai-and-move kind of stop — his family had laid out a full South Indian breakfast, and the nine of
-us descended on it with the appetite of people who'd been riding since dawn without eating. Hassan
-itself is one of those Karnataka towns that most Bangalore riders blow past on the way to Chikmagalur
-or Sakleshpur, but it's a perfectly reasonable place to break the ride and reset before the roads
-start climbing into the Ghats.
+three hours down NH 75. We actually ended up eating twice there, which is exactly as good as it
+sounds. The first stop was Swati Delicacy, a local restaurant where we sat down for a proper
+breakfast before continuing further into town. The second stop was at Sonika's place — a friend
+and colleague who lives in Hassan and had offered to host us for a bit on the way through. She'd
+set out pilav, jamun, and bondas, the kind of spread South Indians are quietly hardwired to
+appreciate, and nine people who'd been on bikes since 6:30 a.m. did not need to be asked twice.
+Hassan itself is one of those Karnataka towns that most Bangalore riders blow past on the way to
+Chikmagalur or Sakleshpur, but between Swati Delicacy and Sonika's hospitality, it earned its
+place as more than just a fuel stop on this trip.
 
 From Hassan, we picked up the route toward Belur and then cut southwest toward Kalasa. The roads
 through this stretch are the kind that remind you why a bike trip beats a car for this part of
