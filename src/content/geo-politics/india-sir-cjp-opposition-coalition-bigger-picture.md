@@ -3,7 +3,7 @@ title: "The Bigger Picture: SIR, the Anti-Modi Coalition, and What India's Youth
 description: "From electoral roll verification to Starlink economics, a coordinated-looking set of pressures on the Indian government is being driven by actors with very different interests — and India's social-media-native youth is caught in the middle, often seeing only the clip, not the context."
 vertical: geo-politics
 subcategory: "Domestic Politics"
-tags: ["sir", "cjp", "abhijit-deepke", "modi", "india", "electoral-rolls", "dhruv-rathi", "youth", "starlink", "fcra"]
+tags: ["sir", "cjp", "abhijeet-dipke", "modi", "india", "electoral-rolls", "dhruv-rathi", "youth", "starlink", "fcra"]
 heroImage: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=1600&q=80&auto=format"
 heroAlt: "Protest crowd at dusk — placards visible against an overcast sky"
 publishDate: 2026-10-12
@@ -11,7 +11,7 @@ author: "Suraj Ghorpade"
 published: true
 region: "India"
 topicCluster: "Student Movements & Public Accountability"
-relatedTopics: ["SIR", "FCRA", "Cockroach Janta Party", "Abhijit Deepke", "Dhruv Rathi", "Prakash Raj", "Narendra Modi", "Elon Musk", "Starlink", "Electoral Rolls", "Rahul Gandhi"]
+relatedTopics: ["SIR", "FCRA", "Cockroach Janta Party", "Abhijeet Dipke", "Dhruv Rathi", "Prakash Raj", "Narendra Modi", "Elon Musk", "Starlink", "Electoral Rolls", "Rahul Gandhi"]
 ---
 
 There is a specific kind of confusion that only happens to people who are genuinely paying attention.
@@ -22,7 +22,7 @@ anti-SIR protests unfold and trying to figure out what is actually happening and
 
 The short version is this: the Special Intensive Revision of electoral rolls, the process everyone
 is currently calling SIR, is an election-commission exercise designed to clean up voter lists.
-The opposition to it — led by names like Abhijit Deepke, supported by Dhruv Rathi and Prakash Raj,
+The opposition to it — led by names like Abhijeet Dipke, supported by Dhruv Rathi and Prakash Raj,
 amplified across social media by a youth audience that got recruited during the NEET protests —
 is framed as a democratic rights issue. Whether it actually is one, or whether it is something else
 being sold as one, is what this piece is going to try to work through.
@@ -51,7 +51,7 @@ SIR, in its current form, is at least partly aimed at this problem. The argument
 straightforward: if you believe elections should be decided by Indian citizens, then the voter list
 should contain Indian citizens. Cleaning the list is a prerequisite for that.
 
-The argument against it — the one Deepke, Dhruv Rathi, and others are now making — is that the
+The argument against it — the one Dipke, Dhruv Rathi, and others are now making — is that the
 verification process can be used to disenfranchise legitimate voters who lack certain documents,
 particularly marginalised communities, the elderly, and the very poor. That is a real concern
 about implementation, and it deserves to be addressed seriously in the design of the process.
@@ -115,10 +115,10 @@ and interests that want the electoral roll to remain unverified. That doesn't ma
 wrong. But it is a reason to look more carefully at who is actually driving the narrative, and
 what they stand to gain from it.
 
-## Abhijit Deepke: from NEET to FCRA to SIR
+## Abhijeet Dipke: from NEET to FCRA to SIR
 
-For readers who followed the CJP protests earlier this year, Abhijit Deepke needs no introduction.
-For those who didn't: Deepke emerged from the Jantar Mantar student protests as one of CJP's most
+For readers who followed the CJP protests earlier this year, Abhijeet Dipke needs no introduction.
+For those who didn't: Dipke emerged from the Jantar Mantar student protests as one of CJP's most
 visible faces, built a significant following among students who were genuinely angry about NEET
 paper leaks and education ministry failures, and has since become the primary public figure
 associated with CJP's expanding agenda.
@@ -128,27 +128,27 @@ after a law was specifically passed to prevent them, is a genuine institutional 
 students who were demanding accountability deserved to be taken seriously. A lot of the anger that
 fuelled the Jantar Mantar protests was legitimate anger at a real problem.
 
-What has happened since is worth examining carefully, because Deepke's conduct has followed a
+What has happened since is worth examining carefully, because Dipke's conduct has followed a
 pattern that should give his followers reason to pause.
 
 **On the FCRA.** When the FCRA amendment was delayed (the Foreign Contribution Regulation Act
 governs how organisations in India can receive foreign funding — see the companion piece on this
-blog for the full background), Deepke claimed a share of the credit and immediately pivoted CJP's
+blog for the full background), Dipke claimed a share of the credit and immediately pivoted CJP's
 energy toward opposing the Act's return to Parliament. The original single-issue demand — exam
 accountability — had been at least partially addressed: the Supreme Court's oversight of NTA was
 running, PM Modi had committed to fast-track courts for paper-leak prosecutions. Rather than
-holding that accountability track and demanding it produce results, Deepke moved to the next issue.
+holding that accountability track and demanding it produce results, Dipke moved to the next issue.
 
 Why would an organisation whose stated purpose is educational accountability pivot to fighting
 legislation that governs foreign funding of civil society organisations? The question of who funds
-CJP's own operations, which has been publicly raised by reporters and which Deepke has consistently
+CJP's own operations, which has been publicly raised by reporters and which Dipke has consistently
 declined to answer directly, is relevant context here.
 
-**On the detention incident.** Following his detention at an airport, Deepke publicly claimed that
+**On the detention incident.** Following his detention at an airport, Dipke publicly claimed that
 police denied him phone access — an account that placed the emotional weight of a family member's
 death during his custody on the police's alleged failure of basic care. The police have since
 stated they have recordings covering the period of his detention that contradict the phone-access
-claim. Deepke has not engaged with the documentation question. He has repeated his account; he has
+claim. Dipke has not engaged with the documentation question. He has repeated his account; he has
 not challenged the recordings' existence, completeness, or accuracy. A person who was genuinely
 denied a phone call during the death of a family member, and who then discovers that the
 detaining authority claims to have documentation disproving that, has an obvious path available:
@@ -156,7 +156,7 @@ go to court, demand the recordings be disclosed, let an independent authority ad
 path has not been taken.
 
 **On reporter questions.** When journalists who have covered CJP with sustained attention have
-pressed Deepke on his intentions, funding sources, and the movement's relationship with political
+pressed Dipke on his intentions, funding sources, and the movement's relationship with political
 parties that are lending it visibility, he does not answer. Not "answers carefully to protect the
 coalition" — which is a legitimate communications strategy, and which CJP's own Saurav Das has
 done transparently. He simply does not engage the substance of questions he finds inconvenient.
@@ -210,7 +210,7 @@ Domestically, you have:
   electoral process and are now opposing the mechanism designed to clean up the voter list
 - The Aam Aadmi Party, which has its own governance track record to defend and has found more
   political mileage in opposition posture than in running its own affairs
-- The Cockroach Janta Party and Abhijit Deepke, who moved from NEET accountability to FCRA
+- The Cockroach Janta Party and Abhijeet Dipke, who moved from NEET accountability to FCRA
   opposition to anti-SIR protest in the space of a year, with funding sources that have not been
   publicly disclosed
 - Dhruv Rathi and other content creators and public figures who have lent credibility to each
@@ -242,7 +242,7 @@ A significant part of the reason this all works is because a very large number o
 are getting their political information from short-form video, YouTube, and social media, and
 the format of those platforms selects heavily for emotional resonance over contextual complexity.
 
-A two-minute clip of Abhijit Deepke speaking at a protest will always outperform a fifteen-minute
+A two-minute clip of Abhijeet Dipke speaking at a protest will always outperform a fifteen-minute
 analysis of what SIR actually does, how it interacts with the NRC process in specific states,
 what the documented history of non-citizen voters on electoral rolls looks like, and what the
 legitimate implementation concerns look like versus what "stop the whole process" means in practice.
@@ -262,7 +262,7 @@ Some questions worth carrying into every political cause you are asked to suppor
 the only beneficiary. Who else gains if SIR is stopped? Who gains if the FCRA is not amended?
 Ask the second-order question.
 
-**What is the track record of the person asking for your support?** Abhijit Deepke led a NEET
+**What is the track record of the person asking for your support?** Abhijeet Dipke led a NEET
 protest with real merit. He has since made documented public claims that appear to contradict the
 police's own recordings of his detention, and he has declined to engage the documentation. That
 is relevant information about whether his subsequent claims deserve to be trusted at face value.
@@ -273,7 +273,7 @@ political parties sitting in the front row, what happens to this movement if its
 fails — are often more revealing than what does get asked.
 
 **Is the person speaking able to engage with the strongest version of the opposing argument?**
-Deepke, Rathi, and others opposing SIR have not, in public interactions, demonstrated that they
+Dipke, Rathi, and others opposing SIR have not, in public interactions, demonstrated that they
 understand the strongest case for clean electoral rolls. They have engaged with the weakest version:
 "the government wants to disenfranchise poor people." The stronger version is: "ineligible voters
 on electoral rolls undermine the legitimacy of every election, and if you oppose verification, you
@@ -320,7 +320,7 @@ recruited you the first time.
 
 Look at what SIR actually does. Read the process documentation, not the protest flyer.
 Ask who benefits from stopping it. Ask who funds the people asking you to stop it.
-Ask what Abhijit Deepke said about his detention, and then look at what the police have said
+Ask what Abhijeet Dipke said about his detention, and then look at what the police have said
 they have on record.
 
 You are old enough and smart enough to hold two things at the same time: the government gets

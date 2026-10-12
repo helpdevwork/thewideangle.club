@@ -1,9 +1,9 @@
 ---
-title: "Abhijit Deepke and the CJP's Second Act: FCRA, SIR, and the Questions He Won't Answer"
-description: "The Jantar Mantar protests made Abhijit Deepke a household name. Now the FCRA is heading back to Parliament, CJP has launched a new campaign called SIR, and a flight-detention incident has put Deepke's credibility — and his habit of contradicting documented fact — under a sharper lens."
+title: "Abhijeet Dipke and the CJP's Second Act: FCRA, SIR, and the Questions He Won't Answer"
+description: "The Jantar Mantar protests made Abhijeet Dipke a household name. Now the FCRA is heading back to Parliament, CJP has launched a new campaign called SIR, and a flight-detention incident has put Dipke's credibility — and his habit of contradicting documented fact — under a sharper lens."
 vertical: geo-politics
 subcategory: "Domestic Politics"
-tags: ["cjp", "fcra", "abhijit-deepke", "student-protests", "india", "civil-society"]
+tags: ["cjp", "fcra", "abhijeet-dipke", "student-protests", "india", "civil-society"]
 heroImage: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=1600&q=80&auto=format"
 heroAlt: "A protest crowd at dusk, placards visible against an overcast sky"
 publishDate: 2026-10-12
@@ -24,13 +24,13 @@ fast-track court commitment produce a convicted leaker before the next exam cycl
 keep watching long enough to find out?
 
 What's happened since is worth a separate piece, because the movement has moved — and one name has
-moved with it in a way that raises a different set of questions. Abhijit Deepke, who emerged from the
+moved with it in a way that raises a different set of questions. Abhijeet Dipke, who emerged from the
 Jantar Mantar protests as one of the CJP's most visible faces, has since been at the centre of the
 FCRA fight, the launch of a new campaign called SIR, and a flight-detention incident that produced
 a set of claims the police's own recordings appear to directly contradict.
 
 This piece attempts to work through each of those threads separately: what the FCRA fight is actually
-about, what SIR represents, and what the documented record — as opposed to what Deepke has said — looks
+about, what SIR represents, and what the documented record — as opposed to what Dipke has said — looks
 like on the detention episode.
 
 ## The FCRA link: how exam protests and foreign funding law ended up in the same sentence
@@ -50,11 +50,11 @@ tabled when it was expected to be. Whether the protests caused the postponement 
 causal sense, or whether the government simply chose to delay an already-contested amendment while
 managing a separate public-order situation, is not something the documented record settles clearly.
 What is clear is that the FCRA amendment did not pass in the monsoon session, and that CJP's
-leadership, including Deepke, publicly claimed a share of credit for that outcome.
+leadership, including Dipke, publicly claimed a share of credit for that outcome.
 
 That framing matters because the FCRA's return to parliamentary discussion — expected in the
 winter session — is now a stated mobilisation hook for CJP's follow-on campaign. The argument
-Deepke and others make is that the monsoon session setback was not a withdrawal but a postponement,
+Dipke and others make is that the monsoon session setback was not a withdrawal but a postponement,
 and that the same pressure that produced the delay needs to be sustained and amplified. That may
 be accurate as a political read of the government's intentions. It may also be a convenient way to
 keep a movement intact once its original single issue — exam accountability — has been partially
@@ -64,7 +64,7 @@ true at once.
 ## SIR: the second campaign
 
 CJP's new campaign, operating under the shorthand SIR, is the organisational vehicle through which
-Deepke and the movement are now framing the FCRA fight and, more broadly, what they describe as
+Dipke and the movement are now framing the FCRA fight and, more broadly, what they describe as
 a pattern of legislative and administrative pressure on civil-society space in India.
 
 The shift from NEET-focused exam accountability to a broader civil-liberties frame is significant.
@@ -74,7 +74,7 @@ that came in with CJP over NEET have a longer list of grievances than a single e
 accountability; FCRA restrictions, if passed in their circulated form, would materially affect the
 kinds of organisations that feed into protest ecosystems like this one.
 
-What's worth flagging is the credibility question that this expansion creates for Deepke personally.
+What's worth flagging is the credibility question that this expansion creates for Dipke personally.
 A leader who can hold a coalition together through a specific, time-limited demand is a different
 proposition from a leader who is asking that coalition to broaden its scope based on his read of
 what's coming next. The first requires organisational skill and a defensible factual case. The
@@ -85,14 +85,14 @@ independently verify.
 That is precisely where the flight-detention incident becomes relevant, and why it is worth
 examining more carefully than most coverage has.
 
-## The flight detention: what Abhijit Deepke said, and what the police have documented
+## The flight detention: what Abhijeet Dipke said, and what the police have documented
 
-At some point following the height of the Jantar Mantar protests, Abhijit Deepke was detained by
+At some point following the height of the Jantar Mantar protests, Abhijeet Dipke was detained by
 law enforcement, reportedly at or en route from an airport. The circumstances and formal legal
 basis of the detention are a matter of contested account, but the broad outline — that he was taken
 into police custody and held for a period before being released — is not disputed.
 
-What Deepke said publicly after his release is the part that demands scrutiny.
+What Dipke said publicly after his release is the part that demands scrutiny.
 
 His account, as given in press interactions following his release, centred on what he described as a
 failure of basic procedural care during his detention: specifically, that he was not given access to
@@ -109,8 +109,8 @@ The police's response to these claims is the part that makes this a different ki
 straightforward detention narrative.
 
 According to reports of the police's own account, the department has recordings — audio and/or
-other documented logs — covering the period of Deepke's detention. Those recordings, per the
-police, show not only that Deepke was treated within normal procedural parameters but that his
+other documented logs — covering the period of Dipke's detention. Those recordings, per the
+police, show not only that Dipke was treated within normal procedural parameters but that his
 treatment was by any reasonable measure considerate: that the basic provisions, communication
 access, and conduct toward him during custody were documented and preserved precisely because
 detention of a high-profile activist was the kind of situation where the department knew everything
@@ -122,7 +122,7 @@ about a political detainee is something a reasonable reader should treat with sc
 the incentive to deny mistreatment is obvious. A "we treated him well, and here is documentation
 covering the period in question" is a different and substantially harder thing to dismiss.
 
-Deepke has not, as of this writing, produced a rebuttal that addresses the documentation question
+Dipke has not, as of this writing, produced a rebuttal that addresses the documentation question
 directly. He has restated his account; he has emphasised the personal loss; he has framed the
 detention as part of a pattern of government harassment. What he has not done is engage with the
 specific claim that recordings exist that contradict his account of being denied phone access.
@@ -131,7 +131,7 @@ A person who has been genuinely wronged — denied access to communication durin
 which a family member dies — and who then learns that the police claim to have recordings that
 contradict this, has an obvious and natural next move: challenge those recordings' completeness,
 contest their interpretation, demand they be made public, go to court. The absence of any such
-move from Deepke is, at minimum, notable.
+move from Dipke is, at minimum, notable.
 
 ## The questions he won't engage
 
@@ -139,17 +139,17 @@ The detention story is one data point. By itself, it would be uncharitable to bu
 — police accounts of their own conduct are self-serving, and a detained activist's account of the
 same events is always going to diverge from the detaining authority's version.
 
-What makes it harder to dismiss is that it fits a pattern that has developed across Deepke's press
+What makes it harder to dismiss is that it fits a pattern that has developed across Dipke's press
 interactions more broadly.
 
 Reporters covering the CJP movement — particularly those covering it with enough time and attention
 to go beyond the protest-site images and official press releases — have noted a specific recurring
-evasion. When questions turn to Deepke's own intentions, his relationship to the broader
+evasion. When questions turn to Dipke's own intentions, his relationship to the broader
 organisations and networks that make up the CJP ecosystem, and the movement's longer-term
 goals beyond the specific demands on the placard, he doesn't answer. This is not the evasion of a
 movement spokesperson carefully staying on message to protect a coalition — which is a legitimate
 tactic that CJP's own Saurav Das, for instance, deployed around the Umar Khalid question quite
-openly, explaining exactly why they weren't going there. Deepke's evasions are of a different kind:
+openly, explaining exactly why they weren't going there. Dipke's evasions are of a different kind:
 he doesn't acknowledge the question, doesn't explain why he's not answering, and moves on in a
 way that reads less as strategic message discipline and more as an inability to hold the question
 steadily.
@@ -157,7 +157,7 @@ steadily.
 The questions that tend to produce this behaviour are not hostile gotcha attempts. They are the
 kinds of questions any serious journalist covering a political movement with national reach should
 be asking: Who is funding the operational expansion of CJP beyond the original Jantar Mantar phase?
-What does Deepke personally understand the SIR campaign to be asking for, and from whom? What is
+What does Dipke personally understand the SIR campaign to be asking for, and from whom? What is
 his relationship to the political parties — Congress, AAP, regional opposition — that have lent
 visibility to CJP events? What happens to the movement if the FCRA amendment doesn't come to the
 floor in the winter session?
@@ -167,7 +167,7 @@ public trust should be able to answer, at least in outline. A credible answer to
 question doesn't require disclosing a private ledger — it can be as simple as "our funding comes
 from Indian donors under domestic contribution rules, and we publish an annual report." A credible
 answer to the party-relationship question can be "we accept solidarity, not instructions, and here
-is how we maintain that line." Deepke hasn't offered versions of either. What he has offered,
+is how we maintain that line." Dipke hasn't offered versions of either. What he has offered,
 repeatedly, is an emotional register that substitutes for substantive engagement: the weight of the
 cause, the sacrifice of the activists, the suffering of the students.
 
@@ -179,7 +179,7 @@ analytical register when pressed, is missing something a movement needs to be du
 ## What the profile adds up to
 
 Taken together — the FCRA framing that expands the movement's mandate in ways that happen to extend
-Deepke's own relevance, the detention claims that contradict available documentation without any
+Dipke's own relevance, the detention claims that contradict available documentation without any
 attempt to engage the documentary record, the consistent evasion of accountability questions from
 reporters — what emerges is a profile worth naming carefully.
 
@@ -198,7 +198,7 @@ distance.
 
 None of this is a reason to dismiss CJP's demands, which stand or fall on their own terms and were
 being made by a coalition of student unions, hunger strikers, and legal petitioners long before
-Deepke became the face most cameras pointed at. The questions about NEET accountability remain live.
+Dipke became the face most cameras pointed at. The questions about NEET accountability remain live.
 The FCRA concerns, if the winter session produces the amendment its critics fear, are real and
 serious on their merits.
 
@@ -216,7 +216,7 @@ kind of work that builds durable political influence. It is also the kind of wor
 spokesperson who can hold up under scrutiny, engage the arguments against their position, and
 not flinch when a reporter asks a question that doesn't have a comfortable answer.
 
-Whether Abhijit Deepke is that person is a question only the next few months will settle. The
+Whether Abhijeet Dipke is that person is a question only the next few months will settle. The
 available evidence is not encouraging.
 
 ---
@@ -224,6 +224,6 @@ available evidence is not encouraging.
 *This analysis was written in October 2026 and reflects the state of publicly available information
 at that point. The FCRA winter session timeline, the SIR campaign's stated objectives, and the full
 documentation around the detention incident may develop further; the core of this piece — the
-evidential questions around Deepke's public conduct — is based on the pattern of conduct described
+evidential questions around Dipke's public conduct — is based on the pattern of conduct described
 above rather than any single claim that could become outdated. As with the earlier CJP piece: treat
 this as a snapshot, verify sourcing before citing specific claims, and watch how this develops.*
