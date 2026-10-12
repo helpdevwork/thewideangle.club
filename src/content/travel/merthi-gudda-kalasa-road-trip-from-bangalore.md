@@ -38,7 +38,7 @@ three hours down NH 75. We actually ended up eating twice there, which is exactl
 sounds. The first stop was Swati Delicacy, a local restaurant where we sat down for a proper
 breakfast before continuing further into town. The second stop was at Sonika's place — a friend
 and colleague who lives in Hassan and had offered to host us for a bit on the way through. She'd
-set out pilav, jamun, and bondas, the kind of spread South Indians are quietly hardwired to
+set out pulav, jamun, and bondas, the kind of spread South Indians are quietly hardwired to
 appreciate, and nine people who'd been on bikes since 6:30 a.m. did not need to be asked twice.
 Hassan itself is one of those Karnataka towns that most Bangalore riders blow past on the way to
 Chikmagalur or Sakleshpur, but between Swati Delicacy and Sonika's hospitality, it earned its
