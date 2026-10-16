@@ -42,7 +42,7 @@ const jsonLd = {
 <BaseLayout title={data.title} description={data.description} vertical={vertical} image={data.heroImage} jsonLd={jsonLd}>
   <article>
     <header class:list={['post-hero', `hero--${theme.heroStyle}`]}>
-      <img src={data.heroImage} alt={data.heroAlt} class="post-hero-image" fetchpriority="high" />
+      <img src={data.heroImage} alt={data.heroAlt} class="post-hero-image" style={`object-position: ${data.heroPosition}`} fetchpriority="high" />
       <div class="post-hero-scrim"></div>
       <div class="container post-hero-content">
         <p class="eyebrow hero-eyebrow">{theme.name}{data.subcategory ? ` · ${data.subcategory}` : ''}</p>

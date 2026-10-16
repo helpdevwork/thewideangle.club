@@ -4,11 +4,12 @@ description: "A first-timer's honest account of tandem skydiving with Skydive Du
 vertical: experiences
 subcategory: "Sky Adventure"
 tags: ["skydiving", "dubai", "palm-jumeirah", "skydive-dubai", "adventure", "bucket-list"]
-heroImage: "/images/skydiving-dubai-palm-aerial.png"
-heroAlt: "Tandem skydive over Palm Jumeirah, Dubai — aerial view of the palm-shaped island and the Arabian Sea"
+heroImage: "/images/skydiving-dubai-hero.jpg"
+heroAlt: "Tandem skydive over Palm Jumeirah, Dubai — the full palm-shaped island visible from freefall"
+heroPosition: "center 45%"
 publishDate: 2025-10-05
 author: "Suraj Ghorpade"
-published: false
+published: true
 experienceType: "Sky Adventure"
 location: "Skydive Dubai, Palm Dropzone, Dubai, UAE"
 sponsored: false

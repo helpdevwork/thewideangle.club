@@ -9,6 +9,7 @@ const base = {
   tags: z.array(z.string()).default([]),
   heroImage: z.string(),
   heroAlt: z.string(),
+  heroPosition: z.string().default("center"),
   publishDate: z.coerce.date(),
   updatedDate: z.coerce.date().optional(),
   author: z.string().default('Suraj Ghorpade'),
