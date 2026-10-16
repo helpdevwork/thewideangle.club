@@ -7,7 +7,7 @@ tags: ["skydiving", "dubai", "palm-jumeirah", "skydive-dubai", "adventure", "buc
 heroImage: "/images/skydiving-dubai-hero.jpg"
 heroAlt: "Tandem skydive over Palm Jumeirah, Dubai — the full palm-shaped island visible from freefall"
 heroPosition: "center 45%"
-publishDate: 2025-10-05
+publishDate: 2026-10-16
 author: "Suraj Ghorpade"
 published: true
 experienceType: "Sky Adventure"
