@@ -8,7 +8,7 @@ heroImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&
 heroAlt: "Snow-capped Himalayan peaks at sunrise"
 publishDate: 2026-08-01
 author: "Suraj Ghorpade"
-published: false
+published: true
 destination: "Himachal Pradesh, India"
 bestSeason: "March–June, September–November"
 budgetBand: "budget"
