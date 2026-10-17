@@ -1,0 +1,298 @@
+---
+// Link-in-bio page for Instagram (and any other bio). One short, mobile-first
+// page: latest posts, the six verticals, credit-card offers, and direct contact.
+// Referral links live in src/config/links.ts.
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { verticalList } from '../config/verticals';
+import { contact } from '../config/contact';
+import { creditCardOffers, tracking } from '../config/links';
+
+const utm = (campaign: string) =>
+  `?utm_source=${tracking.source}&utm_medium=${tracking.medium}&utm_campaign=${encodeURIComponent(campaign)}`;
+
+const allEntries = (
+  await Promise.all(
+    verticalList.map(async (v) => {
+      const entries = await getCollection(v.id, ({ data }) => (import.meta.env.PROD ? data.published : true));
+      return entries.map((e) => ({ ...e, verticalId: v.id, verticalName: v.shortName }));
+    })
+  )
+).flat();
+
+const latest = allEntries.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()).slice(0, 6);
+
+const liveOffers = creditCardOffers.filter((o) => o.url && o.url.startsWith('http'));
+const dateFmt = new Intl.DateTimeFormat('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+---
+
+<BaseLayout
+  title="Links"
+  description="Latest stories, all six verticals, credit card offers and direct contact — everything from thewideangle.club in one place."
+>
+  <section class="container links-page">
+    <header class="links-head">
+      <p class="eyebrow">@thewideangle.club</p>
+      <h1>thewideangle.club</h1>
+      <p class="links-tag">Making people knowledgeable. Adding value to you, every day.</p>
+    </header>
+
+    <section aria-labelledby="latest-h" class="links-block">
+      <h2 id="latest-h" class="links-h">Latest from the publication</h2>
+      <ul class="stack">
+        {
+          latest.map((post) => (
+            <li data-vertical={post.verticalId}>
+              <a
+                class="link-card link-card--post"
+                href={`/${post.verticalId}/${post.id}/${utm(post.id)}`}
+              >
+                <img src={post.data.heroImage} alt="" loading="lazy" width="96" height="96" />
+                <span class="link-card-body">
+                  <span class="pill">{post.verticalName}</span>
+                  <strong>{post.data.title}</strong>
+                  <span class="meta">{dateFmt.format(post.data.publishDate)}</span>
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section aria-labelledby="cards-h" class="links-block links-block--cards" data-vertical="credit-cards">
+      <h2 id="cards-h" class="links-h">Credit cards</h2>
+      {
+        liveOffers.length > 0 ? (
+          <>
+            <ul class="stack">
+              {liveOffers.map((offer) => (
+                <li>
+                  <a
+                    class="link-card link-card--offer"
+                    href={offer.url}
+                    target="_blank"
+                    rel="sponsored nofollow noopener"
+                  >
+                    <span class="link-card-body">
+                      <span class="pill pill--sponsored">Sponsored</span>
+                      <strong>{offer.name}</strong>
+                      <span class="meta">
+                        {offer.issuer} · {offer.blurb}
+                      </span>
+                    </span>
+                    <span class="go" aria-hidden="true">Apply →</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <p class="fine">
+              These are affiliate/referral links: we may earn a commission if you apply and are approved,
+              at no extra cost to you. Approval is at the issuer&rsquo;s discretion. See our{' '}
+              <a href="/disclosure/">affiliate disclosure</a>.
+            </p>
+          </>
+        ) : (
+          <>
+            <a class="link-card" href={`/credit-cards/${utm('credit-cards-hub')}`}>
+              <span class="link-card-body">
+                <strong>Start with the basics</strong>
+                <span class="meta">Plain-English guides to debit and credit cards in India. Card offers are coming soon.</span>
+              </span>
+              <span class="go" aria-hidden="true">Read →</span>
+            </a>
+          </>
+        )
+      }
+    </section>
+
+    <section aria-labelledby="verticals-h" class="links-block">
+      <h2 id="verticals-h" class="links-h">Explore by topic</h2>
+      <ul class="grid">
+        {
+          verticalList.map((v) => (
+            <li data-vertical={v.id}>
+              <a class="tile" href={`/${v.id}/${utm(`hub-${v.id}`)}`}>
+                <strong>{v.name}</strong>
+                <span class="meta">{v.tagline}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section aria-labelledby="contact-h" class="links-block">
+      <h2 id="contact-h" class="links-h">Talk to us</h2>
+      <ul class="grid grid--contact">
+        <li>
+          <a class="tile" href={`https://wa.me/${contact.whatsappNumber}`} target="_blank" rel="noopener">
+            <strong>WhatsApp</strong>
+            <span class="meta">{contact.whatsappDisplay}</span>
+          </a>
+        </li>
+        <li>
+          <a class="tile" href={`mailto:${contact.email}`}>
+            <strong>Email</strong>
+            <span class="meta">{contact.email}</span>
+          </a>
+        </li>
+        <li>
+          <a class="tile" href={`/contact/${utm('contact')}`}>
+            <strong>Contact form</strong>
+            <span class="meta">Questions, collabs, guest posts</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+  </section>
+</BaseLayout>
+
+<style>
+  .links-page {
+    max-width: 640px;
+    padding-block: var(--space-5) var(--space-7);
+  }
+
+  .links-head {
+    text-align: center;
+    margin-bottom: var(--space-5);
+  }
+
+  .links-head h1 {
+    font-size: clamp(2rem, 6vw, 3rem);
+    margin-bottom: var(--space-1);
+  }
+
+  .links-tag {
+    margin: 0;
+  }
+
+  .links-block {
+    margin-top: var(--space-5);
+  }
+
+  .links-h {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-bottom: var(--space-2);
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .stack {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2);
+  }
+
+  .grid--contact {
+    grid-template-columns: 1fr;
+  }
+
+  .link-card,
+  .tile {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    transition: transform 0.2s var(--ease), border-color 0.2s var(--ease);
+  }
+
+  .link-card:hover,
+  .tile:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent, var(--fg));
+  }
+
+  .tile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    height: 100%;
+    border-left: 4px solid var(--accent, var(--fg));
+  }
+
+  .link-card--post img {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    flex: none;
+  }
+
+  .link-card-body {
+    display: grid;
+    gap: 0.2rem;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .link-card strong,
+  .tile strong {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+
+  .meta {
+    font-size: 0.85rem;
+    color: var(--fg-muted);
+    line-height: 1.35;
+  }
+
+  .pill {
+    justify-self: start;
+    font-family: var(--font-display);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent, var(--fg));
+  }
+
+  .pill--sponsored {
+    color: var(--fg-muted);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    padding: 0.1rem 0.5rem;
+  }
+
+  .go {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+
+  .fine {
+    font-size: 0.78rem;
+    margin-top: var(--space-2);
+  }
+
+  .fine a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  @media (max-width: 380px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
